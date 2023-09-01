@@ -48,7 +48,9 @@ class LoginView extends GetView<LoginController> {
                   height: 15,
                 ),
                 ElevatedButton.icon(
-                    onPressed: () {},
+                    onPressed: () async {
+                      await controller.login();
+                    },
                     icon: Icon(Icons.login),
                     label: Text("Login"))
               ],

@@ -18,25 +18,18 @@ class HomeView extends GetView<HomeController> {
               onPressed: () {
                 Get.offNamed(Routes.LOGIN);
               },
-              icon: Icon(Icons.login))
+              icon: Icon(Icons.logout))
         ],
       ),
       body: Center(
           child: Column(children: [
-        Text(
-          'Counter count:',
-          style: TextStyle(fontSize: 20),
-        ),
-        Obx(() => Text(
-              "${controller.count.value}",
-              style: Theme.of(context).textTheme.displayMedium,
-            )),
-        IconButton(
-            style: IconButton.styleFrom(minimumSize: Size(40, 40)),
-            onPressed: () {
-              controller.increment();
-            },
-            icon: Icon(Icons.add))
+        ListTile(
+          title:
+              Text("${controller.user.firstName} ${controller.user.lastName}"),
+          subtitle: Text("${controller.user.email}"),
+          trailing: Text(
+              "${DateTime.now().year - int.parse(controller.user.birthDate!)}"),
+        )
       ])),
     );
   }
