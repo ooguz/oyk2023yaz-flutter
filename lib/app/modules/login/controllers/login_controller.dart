@@ -31,7 +31,7 @@ class LoginController extends GetxController {
     final response = await userProvider.fakeLogin(Login(
         username: usernameController.text, password: passwordController.text));
     if (response != null) {
-      box.write("User", response);
+      box.write("User", response.toJson());
       Get.offAllNamed(Routes.HOME, arguments: response);
     } else {
       Get.snackbar("Hata", "401");
