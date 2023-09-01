@@ -15,16 +15,21 @@ class HomeController extends GetxController {
     final storedUser = box.read("User");
     user = args ?? (storedUser == null ? null : User.fromJson(storedUser));
     super.onInit();
-    await getCount();
   }
 
   Future<int> getCount() async {
-    Future.delayed(Duration(seconds: 5));
+    await Future.delayed(Duration(seconds: 2));
     return 10;
+  }
+
+  Future<void> logout() async {
+    await box.remove("User");
+    Get.offAllNamed(Routes.LOGIN);
   }
 
   @override
   void onReady() async {
+    await getCount();
     if (user == null) {
       Get.offAllNamed(Routes.LOGIN);
     }
