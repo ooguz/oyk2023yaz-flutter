@@ -23,15 +23,14 @@ class HomeView extends GetView<HomeController> {
       ),
       body: Obx(() => Center(
           child: controller.isReady.value
-              ? Column(children: [
-                  ListTile(
-                    title: Text(
-                        "${controller.user!.firstName} ${controller.user!.lastName}"),
-                    subtitle: Text("${controller.user!.email}"),
-                    trailing: Text(
-                        "${DateTime.now().year - int.parse(controller.user!.birthDate!)}"),
-                  )
-                ])
+              ? ListView.builder(
+                  itemBuilder: (context, index) => ListTile(
+                        title: Text(controller.userList![index].email!),
+                        leading: Text(
+                          "${controller.userList![index].id!}",
+                          style: Theme.of(context).textTheme.displaySmall,
+                        ),
+                      ))
               : CircularProgressIndicator())),
     );
   }
