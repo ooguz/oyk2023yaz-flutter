@@ -7,7 +7,8 @@ class AdduserView extends GetView<AdduserController> {
   const AdduserView({Key? key}) : super(key: key);
   @override
   Widget build(BuildContext context) {
-    return Padding(
+    return Scaffold(
+        body: Padding(
       padding: EdgeInsets.all(15),
       child: Column(
         children: [
@@ -15,13 +16,14 @@ class AdduserView extends GetView<AdduserController> {
             "Yeni kullanıcı",
             style: Theme.of(context).textTheme.bodyLarge,
           ),
-          TextField(
-            controller: controller.emailController,
-            decoration: InputDecoration(
-                icon: Icon(Icons.email),
-                hintText: "E-posta",
-                errorText: controller.errorText),
-          ),
+          Obx(() => TextField(
+                controller: controller.emailController,
+                onChanged: (val) => controller.emailValidationError.value = "",
+                decoration: InputDecoration(
+                    icon: Icon(Icons.email),
+                    hintText: "E-posta",
+                    errorText: controller.errorText),
+              )),
           TextField(
             controller: controller.passwordController,
             obscureText: true,
@@ -34,10 +36,11 @@ class AdduserView extends GetView<AdduserController> {
           ElevatedButton(
               onPressed: () {
                 controller.validateEmail();
+                print(controller.errorText);
               },
               child: Text("Oluştur"))
         ],
       ),
-    );
+    ));
   }
 }
