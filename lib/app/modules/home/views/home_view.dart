@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 
 import 'package:get/get.dart';
-import 'package:oyk2023yazm3/app/data/widgets/adduser.dart';
+import 'package:oyk2023yazm3/app/modules/home/views/adduser_view.dart';
 import 'package:oyk2023yazm3/app/routes/app_pages.dart';
 
 import '../controllers/home_controller.dart';
@@ -44,7 +44,7 @@ class HomeView extends GetView<HomeController> {
           : Center(child: CircularProgressIndicator())),
       floatingActionButton: FloatingActionButton(
           onPressed: () {
-            Get.dialog(AddUserDialog());
+            Get.to(AdduserView());
           },
           child: Icon(Icons.add)),
     );

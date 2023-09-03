@@ -6,6 +6,17 @@ class AdduserController extends GetxController {
   TextEditingController emailController = TextEditingController();
   TextEditingController passwordController = TextEditingController();
   final count = 0.obs;
+  String emailValidationError = "";
+
+  void validateEmail() {
+    if (!emailController.text.isEmail) {
+      emailValidationError = "E-posta hatalı";
+    }
+  }
+
+  String? get errorText =>
+      emailValidationError == "" ? null : emailValidationError;
+
   @override
   void onInit() {
     super.onInit();

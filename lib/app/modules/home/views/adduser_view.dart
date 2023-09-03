@@ -18,7 +18,9 @@ class AdduserView extends GetView<AdduserController> {
           TextField(
             controller: controller.emailController,
             decoration: InputDecoration(
-                icon: Icon(Icons.email), hintText: "E-posta", errorText: null),
+                icon: Icon(Icons.email),
+                hintText: "E-posta",
+                errorText: controller.errorText),
           ),
           TextField(
             controller: controller.passwordController,
@@ -29,7 +31,11 @@ class AdduserView extends GetView<AdduserController> {
             ),
           ),
           Divider(),
-          ElevatedButton(onPressed: () {}, child: Text("Oluştur"))
+          ElevatedButton(
+              onPressed: () {
+                controller.validateEmail();
+              },
+              child: Text("Oluştur"))
         ],
       ),
     );
