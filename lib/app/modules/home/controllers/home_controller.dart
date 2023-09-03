@@ -22,6 +22,16 @@ class HomeController extends GetxController {
     super.onInit();
   }
 
+  Future<void> onRefresh() async {
+    isReady.value = false;
+    userList = await getUserList();
+    if (userList == null) {
+      Get.snackbar("Hata", "Olmadı, kısmet olmadı.");
+      return;
+    }
+    isReady.value = true;
+  }
+
   Future<int> getCount() async {
     await Future.delayed(Duration(seconds: 2));
     return 10;

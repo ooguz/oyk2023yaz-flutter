@@ -14,6 +14,13 @@ class HomeView extends GetView<HomeController> {
         title: const Text('HomeView'),
         centerTitle: true,
         actions: [
+          !GetPlatform.isMobile
+              ? IconButton(
+                  onPressed: () async {
+                    controller.onRefresh();
+                  },
+                  icon: Icon(Icons.refresh))
+              : Center(),
           IconButton(
               onPressed: () async {
                 await controller.logout();
@@ -21,17 +28,19 @@ class HomeView extends GetView<HomeController> {
               icon: Icon(Icons.logout))
         ],
       ),
-      body: Obx(() => Center(
-          child: controller.isReady.value
-              ? ListView.builder(
+      body: Obx(() => controller.isReady.value
+          ? RefreshIndicator(
+              child: ListView.builder(
+                  itemCount: controller.userList!.length,
                   itemBuilder: (context, index) => ListTile(
                         title: Text(controller.userList![index].email!),
                         leading: Text(
                           "${controller.userList![index].id!}",
                           style: Theme.of(context).textTheme.displaySmall,
                         ),
-                      ))
-              : CircularProgressIndicator())),
+                      )),
+              onRefresh: () async => await controller.onRefresh())
+          : Center(child: CircularProgressIndicator())),
     );
   }
 }
